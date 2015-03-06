@@ -25,10 +25,28 @@ func Menu() int {
 
 //Game - The game itself
 func Game(mode int) {
-	if game(mode*3, generateDirections, getResponseGame, countingToZero) {
-		fmt.Println("Gratualtion You won!")
+	score := 0
+	for i := 0; i < 5; i++ {
+		if game(mode*3, generateDirections, getResponseGame, countingToZero) {
+			fmt.Println("You won!")
+			score++
+		} else {
+			fmt.Println("Not this time!")
+		}
+		fmt.Println("Current score: ", score)
+		time.Sleep(1000 * time.Millisecond)
+	}
+
+	gameOver(score)
+}
+
+func gameOver(score int) {
+	clearScreen()
+	fmt.Println("Game Over")
+	if score < 5 {
+		fmt.Println("You remembered ", score, "form 5 games.")
 	} else {
-		fmt.Println("Not this time!")
+		fmt.Println("You remembered all games!")
 	}
 }
 
